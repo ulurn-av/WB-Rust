@@ -1,11 +1,11 @@
 use std::io;
-use std::thread::spawn;
+use std::thread::{spawn, JoinHandle};
 
 fn calculate_squares(n: u32) {
-    let mut handles = vec![];
+    let mut handles: Vec<JoinHandle<()>> = Vec::with_capacity(n as usize);
 
     for i in 1..=n {
-        let handle = spawn(move || {
+        let handle: JoinHandle<()> = spawn(move || {
             let square = i*i;
             println!("{square}");
         });
