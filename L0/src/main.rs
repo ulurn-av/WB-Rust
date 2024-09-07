@@ -1,12 +1,8 @@
-mod order;
-mod db;
+#[warn(non_snake_case)]
 
-use axum::{routing::get, Router};
+use L0::run;
 
 #[tokio::main]
 async fn main() {
-    let app = Router::new().route("/", get(|| async { "Hello world!" }));
-
-    let listener = tokio::net::TcpListener::bind("0.0.0.0:3000").await.unwrap();
-    axum::serve(listener, app).await.unwrap();
+    run().await;
 }
