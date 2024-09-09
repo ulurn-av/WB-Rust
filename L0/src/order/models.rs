@@ -1,4 +1,5 @@
 use serde::{Deserialize, Serialize};
+use sqlx::FromRow;
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Delivery {
@@ -41,7 +42,7 @@ pub struct Item {
 }
 
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, FromRow)]
 pub struct Order {
     order_uid: String,
     track_number: String,
@@ -57,4 +58,9 @@ pub struct Order {
     sm_id: u32,
     date_created: String,
     oof_shard: String,
+}
+
+#[derive(Serialize, Deserialize, Debug, FromRow)]
+pub struct Test {
+    order_uid: String,
 }

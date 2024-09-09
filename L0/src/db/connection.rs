@@ -2,8 +2,9 @@ use sqlx::PgPool;
 use std::env;
 use sqlx::postgres::PgPoolOptions;
 
+#[derive(Clone)]
 pub struct Database {
-    pool: PgPool,
+    pub pool: PgPool,
 }
 
 impl Database {

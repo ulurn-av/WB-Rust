@@ -1,11 +1,11 @@
 mod order;
 mod db;
 
-use std::sync::{Arc, Mutex};
+use std::sync::Arc;
+use tokio::sync::Mutex;
 use axum::Router;
-use axum::routing::get;
+use order::api::routes::order_api;
 use dotenv::dotenv;
-use sqlx::PgPool;
 
 pub async fn run() {
     dotenv().ok();
@@ -16,7 +16,7 @@ pub async fn run() {
     ));
 
     let app = Router::new()
-        .nest("/api/order", order::api::routes::order_api(Arc::clone(&database)));
+        .nest("/api/order", order_api(Arc::clone(&database)));
 
     let listener = tokio::net::TcpListener::bind("0.0.0.0:3000")
         .await
